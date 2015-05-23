@@ -18,11 +18,17 @@ public class GerenciadorConexaoMysql implements IGerenciadorConexao {
     private final String DRIVER;
     
     private GerenciadorConexaoMysql(){
-        ResourceBundle rb = ResourceBundle.getBundle("projeto.util.banco");
+        ResourceBundle rb = ResourceBundle.getBundle("projeto.util.derby");
         LOCAL = rb.getString("local");
         USUARIO = rb.getString("usuario");
         SENHA = rb.getString("senha");
         DRIVER = rb.getString("driver");
+          
+        /*LOCAL = rb.getString("local");
+        USUARIO = rb.getString("usuario");
+        SENHA = rb.getString("senha");
+        DRIVER = rb.getString("driver");
+        */
     }
     
     public static GerenciadorConexaoMysql getInstancia(){
