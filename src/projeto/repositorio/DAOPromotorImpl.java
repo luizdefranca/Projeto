@@ -12,7 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import projeto.erro.ConexaoException;
 import projeto.erro.DAOException;
-import projeto.negocio.basica.Fornecedor;
 import projeto.negocio.basica.Promotor;
 import projeto.util.GerenciadorConexaoMysql;
 import projeto.util.IGerenciadorConexao;
@@ -36,7 +35,7 @@ import projeto.util.IGerenciadorConexao;
 		@Override
 		public void incluir(Promotor p) throws ConexaoException, DAOException {
                         c = GER.conectar();
-			String sql = "INSERT INTO fornecedor (codigo, nome, cpf, endereco, email, telefone) VALUES (?,?,?,?,?,?)";
+			String sql = "INSERT INTO ROOT.PROMOTOR (CODIGO, NOME, CPF, ENDERECO, EMAIL, TELEFONE) VALUES (?,?,?,?,?,?)";
 			try{
 				PreparedStatement pstm = c.prepareStatement(sql);
 				pstm.setInt(1, p.getCodigo());
@@ -45,6 +44,7 @@ import projeto.util.IGerenciadorConexao;
 				pstm.setString(4, p.getEndereco());
 				pstm.setString(5, p.getEmail());
 				pstm.setString(6, p.getTelefone());
+                                System.gc();
 				pstm.executeUpdate();
 			}catch(SQLException e){
 				throw new DAOException (e);	
@@ -119,7 +119,7 @@ import projeto.util.IGerenciadorConexao;
         @Override
 		public Promotor get (String x) throws ConexaoException, DAOException{
 			c = GER.conectar();
-			String sql = "SELECT t.codigo, t.nome, t.cpf, t.endereco, t.email, t.telefone FROM fornecedor t";
+			String sql = "SELECT t.codigo, t.nome, t.cpf, t.endereco, t.email, t.telefone FROM promotor t";
 				try{
 					PreparedStatement pstm = c.prepareStatement(sql);
 					pstm.setString(1, x);

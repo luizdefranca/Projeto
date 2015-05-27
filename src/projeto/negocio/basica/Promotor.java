@@ -20,7 +20,7 @@ public class Promotor {
     public Promotor() {
     }
     
-    public Promotor(String nome, String cpf, String endereco, String email, String telefone){
+    public Promotor(int codigo, String nome, String cpf, String endereco, String email, String telefone){
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;

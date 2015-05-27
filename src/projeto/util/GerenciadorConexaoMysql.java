@@ -18,6 +18,9 @@ public class GerenciadorConexaoMysql implements IGerenciadorConexao {
     private final String DRIVER;
     
     private GerenciadorConexaoMysql(){
+        // se for utilizar outro banco de dado alterar esta linha
+        //ResourceBundle rb = ResourceBundle.getBundle("projeto.util.banco");
+        //se for utilizar o derby alterar esta linha
         ResourceBundle rb = ResourceBundle.getBundle("projeto.util.derby");
         LOCAL = rb.getString("local");
         USUARIO = rb.getString("usuario");
@@ -43,6 +46,7 @@ public class GerenciadorConexaoMysql implements IGerenciadorConexao {
         Connection c = null;
         try{
             Class.forName(DRIVER);
+            System.gc();
             c = DriverManager.getConnection(LOCAL,USUARIO,SENHA);
         }catch(ClassNotFoundException | SQLException e){
             throw new ConexaoException(e);
