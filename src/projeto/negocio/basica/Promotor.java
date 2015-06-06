@@ -112,6 +112,19 @@ public class Promotor {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    
+    public Boolean isValido(){
+        
+        if(this.cpf==null) 
+            return false;
+        if(this.email==null)
+            return false;
+        if(this.endereco==null)
+            return false;
+        if(this.nome==null)
+            return false;
+        if(this.telefone==null)
+            return false;
+        return true;
+    }
     
 }

@@ -35,7 +35,7 @@ public class DAOBolaImpl implements IDAOBola{
             pstm.setString(1, b.getNome());
             pstm.setString(2, b.getDescricao());
             pstm.setInt(3, b.getQuantidade());
-            pstm.executeUpdate();   
+            pstm.executeUpdate();
         }catch(SQLException e){
             throw new DAOException(e);
         }finally{
@@ -102,13 +102,38 @@ public class DAOBolaImpl implements IDAOBola{
     }
     
     @Override
+    public Bola get(int x)throws ConexaoException,DAOException{
+        c = GER.conectar();
+        String sql = "SELECT t.id, t.nome, t.descricao, t.quantidade FROM bola t WHERE id=?";
+        try{
+            PreparedStatement pstm = c.prepareStatement(sql);
+            pstm.setInt(1,x);
+            ResultSet rs = pstm.executeQuery(sql);
+            Bola b = null;
+                       
+            if(rs.next()){
+                b = new Bola();
+                b.setId( rs.getInt("id") );
+                b.setNome( rs.getString("nome") );
+                b.setDescricao( rs.getString("descricao") );
+                b.setQuantidade( rs.getInt("quantidade") );
+            }
+            return b;
+        }catch(SQLException e){
+            throw new DAOException(e);
+        }finally{
+            GER.desconectar(c);
+        }
+    }
+    
+    @Override
     public Bola get(String x)throws ConexaoException,DAOException{
         c = GER.conectar();
-        String sql = " SELECT t.id, t.nome, t.descricao, t.quantidade FROM bola t WHERE nome=?";
+        String sql = "SELECT t.id, t.nome, t.descricao, t.quantidade FROM bola t WHERE nome=?";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
             pstm.setString(1,x);
-            ResultSet rs = pstm.executeQuery(sql);
+            ResultSet rs = pstm.executeQuery();
             Bola b = null;
                        
             if(rs.next()){

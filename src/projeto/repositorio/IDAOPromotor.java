@@ -12,4 +12,5 @@ public interface IDAOPromotor {
 	public void atualizar (Promotor p) throws ConexaoException, DAOException;
 	public ArrayList <Promotor> listar () throws ConexaoException, DAOException;
 	public Promotor get (String x) throws ConexaoException, DAOException;
+        public Promotor get (int x) throws ConexaoException, DAOException;
 }

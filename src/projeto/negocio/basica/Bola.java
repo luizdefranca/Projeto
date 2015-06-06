@@ -73,4 +73,25 @@ public class Bola {
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
+
+    /**
+     * @param quantidade the quantidade to set
+     */
+    public void setQuantidade(String quantidade)throws NumberFormatException {
+        this.quantidade = Integer.parseInt(quantidade);
+    }
+
+    /**
+     * Verifica se os campos estao validos (diferente de NULO)
+     * @return Verdadeiro se TODOS os campos estiverem nao nulos
+     */
+    public Boolean isValido(){
+        if(this.nome==null)
+            return false;
+        if(this.descricao==null) 
+            return false;
+        if(this.quantidade==null)
+            return false;
+        return true;
+    }
 }

@@ -116,10 +116,13 @@ import projeto.util.IGerenciadorConexao;
 				}
 		}
 		
-        @Override
-		public Promotor get (String x) throws ConexaoException, DAOException{
+                @Override
+		/**
+                 * retorna objeto pelo nome
+                 */
+                public Promotor get (String x) throws ConexaoException, DAOException{
 			c = GER.conectar();
-			String sql = "SELECT t.codigo, t.nome, t.cpf, t.endereco, t.email, t.telefone FROM promotor t";
+			String sql = "SELECT p.codigo, p.nome, p.cpf, p.endereco, p.email, p.telefone FROM promotor p   WHERE p.nome=?";
 				try{
 					PreparedStatement pstm = c.prepareStatement(sql);
 					pstm.setString(1, x);
@@ -143,6 +146,45 @@ import projeto.util.IGerenciadorConexao;
 					  GER.desconectar(c);
 				}
 		}
+                
+                /**
+                 * 
+                 * @param x
+                 * @return
+                 * @throws ConexaoException
+                 * @throws DAOException 
+                 */
+                
+                @Override
+                public Promotor get (int x) throws ConexaoException, DAOException{
+			c = GER.conectar();
+			String sql = "SELECT p.codigo, p.nome, p.cpf, p.endereco, p.email, p.telefone FROM promotor p   WHERE p.codigo=?";
+				try{
+					PreparedStatement pstm = c.prepareStatement(sql);
+					pstm.setInt(1, x);
+					ResultSet rs = pstm.executeQuery(sql);
+					Promotor p = null;
+					
+						if (rs.next()){
+						    p = new Promotor();
+							p.setCodigo(rs.getInt("codigo"));
+							p.setNome(rs.getString("nome"));
+							p.setCpf(rs.getString("cpf"));
+							p.setEndereco(rs.getString("endereco"));
+							p.setEmail(rs.getString("email"));
+                                                        p.setTelefone(rs.getString("Telefone"));
+							
+							}
+					return p;
+					}catch(SQLException e){
+					 throw new DAOException (e);
+					}finally{
+					  GER.desconectar(c);
+				}
+		}
+                
+                
+                
 
    
 	}
