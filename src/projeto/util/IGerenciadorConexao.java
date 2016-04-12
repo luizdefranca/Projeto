@@ -2,7 +2,9 @@ package projeto.util;
 
 import java.sql.Connection;
 import projeto.erro.ConexaoException;
-
+/*
+apenas um comentário
+*/
 /**
  *
  * @author Tito
